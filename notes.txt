@@ -1,0 +1,467 @@
+
+<!--
+Check if localStorage is supported:
+
+      if (window.localStorage) {
+        // yes!
+      }-->
+
+
+
+<!--http://websocket4net.codeplex.com/-->
+<!--https://www.heroku.com/features-->
+
+
+
+<!--The AppCache system always makes an attempt to request the manifest to check to see if it needs to update its list of assets. If that requests fails it is normally one of two things, the manifest file is no longer being used (that is, it is not hosted) or the system is unable to access the network to fetch the file.
+
+window.applicationCache.addEventListener("error", function(e) {
+  alert("Error fetching manifest: a good chance we are offline");
+});-->
+
+
+
+<!--It is simple to check if you are online by querying window.navigator.onLine
+
+if (navigator.onLine) {
+  alert('online')
+} else {
+  alert('offline');
+}
+You can also be told when there is a change in the network state. Just listen for the for the events on window.onOnline and window.onOffline
+
+window.addEventListener("offline", function(e) {
+  alert("offline");
+}, false);
+
+window.addEventListener("online", function(e) {
+  alert("online");
+}, false);-->
+
+
+
+<!-- found a solution on how to backup local storage files and zip them to my local drive without any server code.below is a code snippet that works fine for me atleast for now.any modifications and enhancements will be highly apreciated.
+
+if (localStorageKeys.length > 0) {
+
+    for (var i = 0; i < localStorageKeys.length; i++) {
+        var key = localStorageKeys[i];
+        if (key.search(_instrumentId) != -1) {
+            keysToBackup.push(key);
+            var data = localStorage.getItem(localStorageKeys[i]);
+            zip.file(localStorageKeys[i].slice(0, -19) + ".txt", data);
+        }
+        else {
+            keysNotToBackup.push(key);
+        }
+        var datafile = document.getElementById('backupData');
+        datafile.download = formName + "_Data.zip";
+        datafile.href = window.URL.createObjectURL(zip.generate({ type: "blob" }));
+
+    }
+}-->
+
+
+
+
+
+
+
+
+<!--Iterating Keys in the Local Storage
+You can iterate the keys (property names) of the key - value pairs stored in the session or local storage, like this:
+for(var i=0; i < sessionStorage.length; i++){
+
+    var propertyName = sessionStorage.key(i);
+
+    alert(  i + " : " + propertyName + " = " +
+            sessionStorage.getItem(propertyName));
+}
+The sessionStorage.length property returns the number of properties stored in the sessionStorage object.
+The function key() returns the property name (or key name) of the property with the index passed as parameter to the function.-->
+
+
+
+
+
+
+
+<!--There are two basic methods, one for setting an item in storage and one for getting that item, they are:
+
+// store item
+localStorage.setItem("item_key", "value I am storing");
+
+// retrieve item
+var data = localStorage.getItem("item_key");
+That’s it.
+
+The storage saves values as strings, so if you want to store a different type of data object, such as an array or javascript object. You will need to JSONify, here’s an example storing an array.
+
+var listdata = [1, 2, 3];
+
+// store array back to localstorage
+localStorage.setItem("list_data_key",  JSON.stringify(listdata));
+
+// retrieve jsonified stored data and convert
+var storedData = localStorage.getItem("listData");
+if (storedData) {
+  listdata = JSON.parse(storedData);
+}
+-->
+
+
+
+
+
+
+<!--Remove Single Key: localStorage.removeItem("item_key");
+
+Clear All Local Storage: localStorage.clear()-->
+
+
+
+
+
+
+<!--if (('localStorage' in window) && window.localStorage !== null) {
+
+  // easy object property API
+  localStorage.wishlist = '["Unicorn","Narwhal","Deathbear"]';
+
+}-->
+
+
+
+
+<!--You can use transitions into pseudo-selector states like :hover or from HTML5 forms, :invalid and :valid (example with form validation states). But they're much more powerful and can be triggered when you add any class to an element.
+
+div.box {
+  left: 40px;
+  -webkit-transition: all 0.3s ease-out;
+     -moz-transition: all 0.3s ease-out;
+       -o-transition: all 0.3s ease-out;
+          transition: all 0.3s ease-out;
+}
+div.box.totheleft { left: 0px; }
+div.box.totheright { left: 80px; }
+
+By adding the toggling the classes of totheleft and totheright you can move the box around. Compare this amount of code with that of a JavaScript animation library. Clearly, the number of bytes sent to the browser is much less when using CSS-based animation. Additionally, with GPU level acceleration, these visual transitions will be as smooth as possible.-->
+
+
+
+
+
+
+
+<!--http://cubiq.org/dropbox/cssgrad.html-->
+
+<!--http://www.phpied.com/files/cssfreebies/cssfreebies.html-->
+
+
+
+
+
+
+<!--window.localStorage and window.sessionStorage {
+  long length; // Number of items stored
+  string key(long index); // Name of the key at index
+  string getItem(string key); // Get value of the key
+  void setItem(string key, string data); // Add a new key with value data
+  void removeItem(string key); // Remove the item key
+  void clear(); // Clear the storage
+-->
+
+
+
+
+
+
+
+
+
+<!--function whatIsYourCurrentStatus() {
+  var status = window.prompt("What is your current status?");
+  if (!status) return;
+  if (navigator.onLine) {
+    sendToServer(status);
+  } else {
+    saveStatusLocally(status);
+  }
+}
+
+function sendLocalStatus() {
+  var status = readStatus();
+  if (status) {
+    sendToServer(status);
+    window.localStorage.removeItem("status");
+  }
+}
+
+
+window.addEventListener("load", function() {
+   if (navigator.onLine) {
+     sendLocalStatus();
+   }
+}, true);
+
+window.addEventListener("online", function() {
+  sendLocalStatus();
+}, true);
+
+window.addEventListener("offline", function() {
+  alert("You're now offline. If you update your status, it will be sent when you go back online");
+}, true);-->
+
+
+
+
+
+
+
+
+
+
+
+<!--Quota API lets you control the amount of local memory space your application needs. Just two commands will do the job but check its limitations and what storage APIs are affected by it.
+
+(function() {
+  var outputs = document.querySelectorAll('output');
+  document.querySelector('#temp-query').addEventListener(
+    'click', function() {
+      webkitStorageInfo.queryUsageAndQuota(
+          webkitStorageInfo.TEMPORARY,
+          function(used, remaining) {
+            outputs[0].textContent = used;
+            outputs[1].textContent = remaining;
+          }, function(error) { alert(error) });
+
+    }, false);
+
+  document.querySelector('#perm-request').addEventListener(
+    'click', function() {
+      webkitStorageInfo.requestQuota(
+          webkitStorageInfo.PERSISTENT,
+          document.querySelector('#requested-quota').value,
+          function(used) {
+            outputs[2].textContent = used;
+          }, function(error) { alert(error) });
+
+    }, false);
+}())​-->
+
+
+
+
+
+
+
+
+
+
+<!--In this case, we don’t really want an 800px page width unless we are sure the user’s browser window is at least 800px wide. Otherwise, we will end up with one of those annoying horizontal scrollbars.
+So, we’re going to wrap that declaration (along with several others) inside a media query.
+
+
+@media all and (min-width:800px){
+  .pg{
+    width:800px;
+    margin:0 auto;
+  }
+}-->
+
+
+
+
+
+<!--Currently, there are defined formats supported by different browsers. HTML5 based supported formats are:
+
+Audio: MP3, Wav, and Ogg
+Video: MP4, WebM, and Ogg
+Sample code for audio & video implementation looks like:
+
+
+
+<audio id="sampleAudio" controls>
+    <source src="../Files/AudioSample.mp3">
+    <source src="../Files/AudioSample.wav">
+    <source src="../Files/AudioSample.ogg">
+    Your browser does not support the audio element.
+</audio>
+
+<video id="sampleVideo" controls src="../Files/VideoSample.mp4">
+     <track src="../Files/sampleSubtitles.vtt" srclang="en" kind="subtitles" label="English subtitles">
+    Your browser does not support the audio element.
+</video>
+
+-- For runtime button based operations --
+function CMute(controlId) {
+    $(controlId).attr('muted', true);
+}
+
+function CUnMute(controlId) {
+    $(controlId).attr('muted', false);
+}
+
+function CPause(controlId) {
+    if (!($(controlId).get(0).paused))
+        $(controlId).get(0).pause();
+}
+
+function CPlay(controlId) {
+    $(controlId).get(0).play();
+}
+
+function CFullScreen(controlId) {
+    // Only Chrome code currently.
+    $(controlId)[0].webkitRequestFullScreen();
+}
+
+<input type="button" value="Mute" onclick="CMute(sampleAudio);"/>
+<input type="button" value="Unmute" onclick="CUnMute(sampleAudio);"/>
+<input type="button" value="Pause" onclick="CPause(sampleAudio);"/>
+<input type="button" value="Play" onclick="CPlay(sampleAudio);"/>
+-->
+
+
+
+
+
+
+<!--Checking for geolocation support uses detection technique #1. If your browser supports the geolocation API, there will be a geolocation property on the global navigator object. If your browser doesn’t support the geolocation API, the geolocation property will not be present inside of navigator. Here’s how to check for geolocation support:
+
+function supports_geolocation() {
+  return 'geolocation' in navigator;
+}
+
+-->
+
+
+<!--Geo Location
+
+
+Sample code for GeoLocation - Latitude & Longitude, looks like:
+
+
+// navigator.geolocation.getCurrentPosition(success_callback, error_callback, {other parameters});
+// The watchPosition() function has the same structure as getCurrentPosition()
+function getLocation() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(updateLocation, handleLocationError, {
+            timeout: 1000000,
+            maximumAge: 1000,
+            enableHighAccuracy: false
+        });
+    }
+    else {
+        document.getElementById("supportstatus").innerHTML = "HTML5 Geolocation is not supported in your browser.";
+    }
+}
+
+function updateLocation(position) {
+    var latitude = position.coords.latitude;
+    var longitude = position.coords.longitude;
+    var timeTaken = new Date(position.timestamp);
+    ...
+}
+
+function handleLocationError(error) {
+    switch(error.code)
+    {
+        ...
+    }
+}
+
+
+
+
+
+Sample code for GeoLocation - Map display, looks like:
+
+<div id="mapView" class="mapDimension1"></div>
+
+// include the Maps API JavaScript using a script tag.
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+
+// navigator.geolocation.getCurrentPosition
+function showMap() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showMapLocation, handleLocationError, {
+            timeout: 1000000,
+            maximumAge: 1000,
+            enableHighAccuracy: true
+        });
+    }
+}
+
+// create an object literal to hold map properties and create a "map" object & "marker" objects
+function showMapLocation(position) {
+    var latlng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+    var myOptions = {
+        zoom: 16,
+        center: latlng,
+        mapTypeControl: false,
+        navigationControlOptions: { style: google.maps.NavigationControlStyle.SMALL },
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+    };
+    var map = new google.maps.Map(document.getElementById("mapView"), myOptions);
+
+    var marker = new google.maps.Marker({
+            position: latlng,
+            map: map,
+            title: "You are here! (Accuracy: " + position.coords.accuracy + " meter radius)"
+        });
+}-->
+
+
+
+
+<!--http://www.chartjs.org/-->
+
+
+
+
+
+<!--Checking for offline support uses detection technique #1. If your browser supports offline web applications, there will be an applicationCache property on the global window object. If your browser doesn’t support offline web applications, the applicationCache property will be undefined. You can check for offline support with the following function:
+
+function supports_offline() {
+  return !!window.applicationCache;
+}-->
+
+
+
+
+
+
+<!--Web Socket
+
+function WebSocketTest() {
+    if ("WebSocket" in window) {
+        // Open a Web Socket
+        var ws = new WebSocket("ws://myServer/HTML5Demo/");
+        ws.onopen = function () {
+            // Send data
+            ws.send("Message sent to server");
+            alert("Message was sent to server.");
+        };
+        ws.onmessage = function (evt) {
+            //Recieve data
+            var receivedmsg = evt.data;
+            alert("Message is received from server"+ receivedmsg);
+        };
+        ws.onclose = function () {
+            // Close a Websocket
+            alert("Connection is closed.");
+        };
+        ws.onerror = function (evt) {
+            // Log Error
+            alert("ERROR!!! " + evt.message);
+        };
+    }
+}-->
+
+
+
+
+
+
+<!--http://www.webdesignerdepot.com/2012/01/how-to-make-your-own-icon-webfont/-->
