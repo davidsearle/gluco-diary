@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<!--<html manifest="manifest.php">-->
+<html>
+
+    <head>
+        <title>GlucoDiary</title>
+        <link rel='shortcut icon' type='image/x-icon' href='favicon.ico' />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" />
+        <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+        <link rel="stylesheet" href="css/default.css">
+        <link rel="stylesheet" href="css/buttons.css">
+        <script src="js/default.js"></script>
+        <script src="js/chart.min.js"></script>
+    </head>
+
+    <body>
+        <div id="container">
+            <div id="GDcontrol" class="GDsection">
+                <h1>GlucoDiary</h1>
+                <a class="button has-icon has-text is-success">
+                    <i class="icon-plus"></i>Carbs</a>
+                <a class="button has-icon has-text is-danger">
+                    <i class="icon-plus"></i>Glucose</a>
+                <a class="button has-icon has-text is-primary">
+                    <i class="icon-plus"></i>Insulin</a>
+                <!--<input type="text" id="txtname">        -->
+            </div>
+            <div id="GDchart" class="GDsection">
+                <canvas id="myChart" width="320" height="240"></canvas>
+                <h3>Last 80 entries</h3>
+            </div>
+            <div id="GDstatus" class="GDsection">
+                <h4>Input</h4>Glucose:
+                <select>
+                    <option>0</option>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                    <option>6</option>
+                    <option>7</option>
+                    <option>8</option>
+                    <option>9</option>
+                </select>
+                <select>
+                    <option>0</option>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                    <option>6</option>
+                    <option>7</option>
+                    <option>8</option>
+                    <option>9</option>
+                </select>
+                <strong>.</strong>
+                <select>
+                    <option>0</option>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                    <option>6</option>
+                    <option>7</option>
+                    <option>8</option>
+                    <option>9</option>
+                </select>
+                <input type="button" value="update" onclick="save()">
+                <div id="result"></div>
+            </div>
+        </div>
+        <script>
+            //localstore();
+            chart();
+        </script>
+    </body>
+
+</html>
