@@ -3,38 +3,39 @@ body {
     padding: 0;
     background-color: #FFF;
     font-size: 100%;
-    line-height: 1.125em; /* 16×1.125=18 */
+    line-height: 1.125em;
+    /* 16×1.125=18 */
 }
-
-body {  /*CSS3 Gradient*/
-  background-color: #2F2727;
-  background-position: center center;
-  background-repeat: no-repeat;
-  /* Safari 4-5, Chrome 1-9 */
-  background: -webkit-gradient(radial, center center, 0, center center, 460, from(#1a82f7), to(#2F2727));
-  /* Safari 5.1+, Chrome 10+ */
-  background: -webkit-radial-gradient(circle, #1a82f7, #2F2727);
-  /* Firefox 3.6+ */
-  background: -moz-radial-gradient(circle, #1a82f7, #2F2727);
-  /* IE 10 */
-  background: -ms-radial-gradient(circle, #1a82f7, #2F2727);
+body {
+    /*CSS3 Gradient*/
+    background-color: #2F2727;
+    background-position: center center;
+    background-repeat: no-repeat;
+    /* Safari 4-5, Chrome 1-9 */
+    background: -webkit-gradient(radial, center center, 0, center center, 460, from(#1a82f7), to(#2F2727));
+    /* Safari 5.1+, Chrome 10+ */
+    background: -webkit-radial-gradient(circle, #1a82f7, #2F2727);
+    /* Firefox 3.6+ */
+    background: -moz-radial-gradient(circle, #1a82f7, #2F2727);
+    /* IE 10 */
+    background: -ms-radial-gradient(circle, #1a82f7, #2F2727);
+    /* Opera 11.1+ */
+    background: -o-radial-gradient(circle, #1a82f7, #2F2727);
 }
-
 .bodytext p {
-    font-size: 0.875em; /* 16x.875=14 */
+    font-size: 0.875em;
+    /* 16x.875=14 */
 }
-
 .sidenote {
-    font-size: 0.75em; /* 16x0.75=12 */
+    font-size: 0.75em;
+    /* 16x0.75=12 */
 }
-
-#container {
+.GDcontainer {
     background-color:#FFF;
     width: 320px;
     margin: 0 auto;
     padding-bottom:73px;
 }
-
 .GDsection {
     border-top: 3px solid #666;
     margin-bottom: 10px;
@@ -42,23 +43,18 @@ body {  /*CSS3 Gradient*/
     color: #000;
     text-align:center;
 }
-
-#GDcontrol {
+.GDcontrol {
     padding: 0 7px;
     background-color:#FFF;
 }
-
-#GDchart {
+.GDchart {
     padding:7px 0;
     margin:0;
     background-color:#FFF;
 }
-
-#GDstatus {
+.GDstatus {
     background-color: #CCC;
 }
-
-
 select {
     font-size: 20px;
     border: 1px solid lightblue;
@@ -67,9 +63,9 @@ select {
     padding: 12px;
     text-align: center;
     -webkit-appearance: none;
+    -moz-appearance: none;
     background-color: lightblue;
 }
-
-    select:active {
-        border: 1px solid #000;
-    }
+select:active {
+    border: 1px solid #000;
+}
