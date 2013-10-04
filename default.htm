@@ -8,7 +8,6 @@
         <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
         <link rel="stylesheet" href="css/default.css">
         <link rel="stylesheet" href="css/buttons.css">
-        <!-- <script src="js/chart.min.js"></script>-->
         <script src="js/default.js"></script>
         <script src="js/standalone-framework.js"></script>
         <script src="js/highcharts.js"></script>
@@ -24,13 +23,9 @@
                     <i class="icon-plus"></i>&nbsp;Glucose&nbsp;</a>
                 <a id="GDinsulin" class="button has-icon has-text is-primary">
                     <i class="icon-plus"></i>&nbsp;Insulin&nbsp;</a>
-                <!--<input type="text" id="txtname">        -->
             </div>
             <div class="GDchart GDsection">
-                <!-- <div id="highcharts" style="min-width: 310px; height: 400px; margin: 0 auto"></div>-->
                 <div id="highcharts" width="320" height="240" style="margin: 0 auto"></div>
-                <!-- <canvas id="myChart" width="320" height="240"></canvas>-->
-                <!-- <h3>Last 80 entries</h3>-->
             </div>
             <div class="GDstatus GDsection">
                 <div id="result"></div>
@@ -44,44 +39,16 @@
             </div>
             <div id="inputGlucoseReading" class="GDsection">
                 <h4>Glucose:</h4>
-                <select id="glucoseTens">
-                    <option>0</option>
-                    <option>1</option>
-                    <option>2</option>
-                    <option>3</option>
-                    <option>4</option>
-                    <option>5</option>
-                    <option>6</option>
-                    <option>7</option>
-                    <option>8</option>
-                    <option>9</option>
-                </select>
-                <select id="glucoseUnits">
-                    <option>0</option>
-                    <option>1</option>
-                    <option>2</option>
-                    <option>3</option>
-                    <option>4</option>
-                    <option>5</option>
-                    <option>6</option>
-                    <option>7</option>
-                    <option>8</option>
-                    <option>9</option>
-                </select>
-                <strong>.</strong>
-                <select id="glucoseDecimal">
-                    <option>0</option>
-                    <option>1</option>
-                    <option>2</option>
-                    <option>3</option>
-                    <option>4</option>
-                    <option>5</option>
-                    <option>6</option>
-                    <option>7</option>
-                    <option>8</option>
-                    <option>9</option>
-                </select>
-                <input type="button" value="Save" onclick="GlucoDiary.SaveGlucoseReading()">
+                <input type="tel" id="glucoseUnits">
+                <input type="button" value="Save" class="button" onclick="GlucoDiary.SaveGlucoseReading()">
+            </div>
+            <div class="statusConsole GDsection">
+                <h4>Console:</h4>
+                <div id="dataStatusMessage"></div>
+            </div>
+            <div class="GDsection">
+            <br /><br /><br /><br /><br /><br />
+<!--            help scroll into view-->
             </div>
         </div>
     </body>
