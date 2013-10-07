@@ -1,16 +1,32 @@
 /*jslint browser: true, devel: true, sloppy: true, plusplus: true */
-// GlucoDiary Namespace
+///// INIT GlucoDiary Namespace and chart options /////
 var GlucoDiary = GlucoDiary || {};
-var Highcharts;
+var Highcharts, chart;
 var GDoptions = {
         chart: {
-            renderTo: 'highcharts'
+            renderTo: 'highcharts',
+            height: 300,
+            width: 320
+        },
+        global: {
+            useUTC: false
         },
         title: {
             text: 'Last 80 entries'
         },
         tooltip: {
             enabled: false
+        },
+        xAxis: {
+            //type: 'datetime',
+            title: ''//,
+//            dateTimeLabelFormats: { // don't display the dummy year
+//                month: '%e. %b',
+//                year: '%b'
+//            }
+        },
+        yAxis: {
+            title: ''
         },
         credits: {
             enabled: false
@@ -35,37 +51,34 @@ var GDoptions = {
             animation: false
         },
             {
-                type: 'spline',
+                type: 'column',
                 name: 'Carbs',
-                //data: [6, 6, 5, 4, 10, 3, 7, 5, 3, 7],
                 data: [],
                 color: '#8cc152',
-//                lineColor: '#8cc152',
-//                fillOpacity: 0.5,
                 animation: false
             },
             {
                 type: 'line',
                 name: 'Insulin',
                 data: [],
-//                data: [5, 4, 10, 3, 7, 5, 3, 7, 4, 8],
                 color: '#3bafda',
-//                lineColor: '#3bafda',
-//                fillOpacity: 0.3,
                 animation: false
             }
-                ]
+            ]
     };
 
 GlucoDiary.HighChart = function () {
     GlucoDiary.ReadGlucoseReading();
-    var chart = new Highcharts.Chart(GDoptions);
+    GlucoDiary.ReadCarbsReading();
+    GlucoDiary.ReadInsulinReading();
+    chart = new Highcharts.Chart(GDoptions);
 };
 
 
 
 ///// INIT /////
 window.onload = function () {
+    //localStorage.clear();
     if (GlucoDiary.CheckSupportsStorage() && GlucoDiary.CheckSupportsAppCache()) {
         GlucoDiary.CheckIfOnline();
         GlucoDiary.InitInteractionListeners();
@@ -80,10 +93,30 @@ window.onload = function () {
 /////////   EVENT LISTENERS    ////////
 GlucoDiary.InitInteractionListeners = function () {
     document.getElementById("GDcarbs").onclick = function () {
-        alert('record carbs');
+        document.getElementById("inputCarbsReading").scrollIntoView();
+        document.getElementById("carbsUnits").focus();
+        document.getElementById("carbsUnits").select();
+    };
+    document.getElementById("carbsUnits").onclick = function () {
+        this.select();
+    };
+    document.getElementById("carbsUnits").onkeydown = function (e) {
+        if (e.keyCode === 13) {
+            GlucoDiary.SaveCarbsReading();
+        }
     };
     document.getElementById("GDinsulin").onclick = function () {
-        alert('record insulin');
+        document.getElementById("inputInsulinReading").scrollIntoView();
+        document.getElementById("insulinUnits").focus();
+        document.getElementById("insulinUnits").select();
+    };
+    document.getElementById("insulinUnits").onclick = function () {
+        this.select();
+    };
+    document.getElementById("insulinUnits").onkeydown = function (e) {
+        if (e.keyCode === 13) {
+            GlucoDiary.SaveInsulinReading();
+        }
     };
     document.getElementById("GDglucose").onclick = function () {
         document.getElementById("inputGlucoseReading").scrollIntoView();
@@ -132,17 +165,15 @@ GlucoDiary.CheckSupportsAppCache = function () {
 
 
 ////////  FUNCTIONS   /////////////
-
 GlucoDiary.SaveGlucoseReading = function () {
     if (typeof (Storage) !== "undefined") {
         var d, dFormatted;
-       // alert(document.getElementById("glucoseUnits").value === "0");
         if ((document.getElementById("glucoseUnits").value === "") || (document.getElementById("glucoseUnits").value === "0")) {
             document.getElementById("errormessage").innerHTML = "Please select a value before clicking SAVE";
             document.getElementById("errormessage").scrollIntoView();
         } else {
             d = new Date();
-            dFormatted = [d.getFullYear(), ("0" + d.getMonth()).slice(-2), ("0" + d.getDate()).slice(-2), "_", ("0" + d.getUTCHours()).slice(-2), ("0" + d.getUTCMinutes()).slice(-2), ("0" + d.getUTCSeconds()).slice(-2)].join("");
+            dFormatted = [d.getFullYear(), ("0" + d.getMonth()).slice(-2), ("0" + d.getDate()).slice(-2), "_", ("0" + d.getHours()).slice(-2), ("0" + d.getMinutes()).slice(-2), ("0" + d.getSeconds()).slice(-2)].join("");
             localStorage["gluco_" + dFormatted] = parseInt(document.getElementById("glucoseUnits").value, 10);
             document.getElementById("glucoseUnits").value = "0";
             document.getElementById("errormessage").innerHTML = "";
@@ -155,19 +186,87 @@ GlucoDiary.SaveGlucoseReading = function () {
         document.getElementById("errormessage").scrollIntoView();
     }
 };
-
-
-//////  Iterating Keys in the Local Storage
+GlucoDiary.SaveCarbsReading = function () {
+    if (typeof (Storage) !== "undefined") {
+        var d, dFormatted;
+        if ((document.getElementById("carbsUnits").value === "") || (document.getElementById("carbsUnits").value === "0")) {
+            document.getElementById("errormessage").innerHTML = "Please select a value before clicking SAVE";
+            document.getElementById("errormessage").scrollIntoView();
+        } else {
+            d = new Date();
+            dFormatted = [d.getFullYear(), ("0" + d.getMonth()).slice(-2), ("0" + d.getDate()).slice(-2), "_", ("0" + d.getHours()).slice(-2), ("0" + d.getMinutes()).slice(-2), ("0" + d.getSeconds()).slice(-2)].join("");
+            localStorage["carbs_" + dFormatted] = parseInt(document.getElementById("carbsUnits").value, 10);
+            document.getElementById("carbsUnits").value = "0";
+            document.getElementById("errormessage").innerHTML = "";
+            document.getElementById("infomessage").innerHTML = "Data Saved";
+            document.getElementById("container").scrollIntoView();
+            GlucoDiary.HighChart();
+        }
+    } else {
+        document.getElementById("errormessage").innerHTML += "Cannot save :(<br />";
+        document.getElementById("errormessage").scrollIntoView();
+    }
+};
+GlucoDiary.SaveInsulinReading = function () {
+    if (typeof (Storage) !== "undefined") {
+        var d, dFormatted;
+        if ((document.getElementById("insulinUnits").value === "") || (document.getElementById("insulinUnits").value === "0")) {
+            document.getElementById("errormessage").innerHTML = "Please select a value before clicking SAVE";
+            document.getElementById("errormessage").scrollIntoView();
+        } else {
+            d = new Date();
+            dFormatted = [d.getFullYear(), ("0" + d.getMonth()).slice(-2), ("0" + d.getDate()).slice(-2), "_", ("0" + d.getHours()).slice(-2), ("0" + d.getMinutes()).slice(-2), ("0" + d.getSeconds()).slice(-2)].join("");
+            localStorage["insulin_" + dFormatted] = parseInt(document.getElementById("insulinUnits").value, 10);
+            document.getElementById("insulinUnits").value = "0";
+            document.getElementById("errormessage").innerHTML = "";
+            document.getElementById("infomessage").innerHTML = "Data Saved";
+            document.getElementById("container").scrollIntoView();
+            GlucoDiary.HighChart();
+        }
+    } else {
+        document.getElementById("errormessage").innerHTML += "Cannot save :(<br />";
+        document.getElementById("errormessage").scrollIntoView();
+    }
+};
 
 GlucoDiary.ReadGlucoseReading = function () {
-    var i, propertyName, glucoseString;
+    var i, propertyName, glucoseString, dtString;
     glucoseString = [];
-    document.getElementById("dataStatusMessage").innerHTML = "getting data ...<br />";
     for (i = 0; i < localStorage.length; i++) {
         propertyName = localStorage.key(i);
-        glucoseString.push(localStorage.getItem(propertyName));
-        //document.getElementById("dataStatusMessage").innerHTML += (i + " : " + propertyName + " = " + localStorage.getItem(propertyName) + "<br />");
+        if (localStorage.key(i).indexOf("gluco_") !== -1) {
+            dtString = Date.parse(localStorage.key(i).substr(6, 4) + "/" + localStorage.key(i).substr(10, 2) + "/" + localStorage.key(i).substr(12, 2) + " " + localStorage.key(i).substr(15, 2) + ":" + localStorage.key(i).substr(17, 2) + ":" + localStorage.key(i).substr(19, 2));
+            glucoseString.push("[" + [dtString, localStorage.getItem(propertyName)] + "]");
+            document.getElementById("dataStatusMessage").innerHTML += "Gluc " +  dtString + "<br />" + new Date(dtString).toString() + " <br /> " + localStorage.key(i).substr(6, 4) + "/" + localStorage.key(i).substr(10, 2) + "/" + localStorage.key(i).substr(12, 2) + " " + localStorage.key(i).substr(15, 2) + ":" + localStorage.key(i).substr(17, 2) + ":" + localStorage.key(i).substr(19, 2) + "<br />::--- " + localStorage.getItem(propertyName) + "<br />";
+        }
     }
     GDoptions.series[0].data = JSON.parse("[" + glucoseString + "]");
-    document.getElementById("dataStatusMessage").innerHTML = "data loaded";
+};
+
+GlucoDiary.ReadCarbsReading = function () {
+    var i, propertyName, carbsString, dtString;
+    carbsString = [];
+    for (i = 0; i < localStorage.length; i++) {
+        propertyName = localStorage.key(i);
+        if (localStorage.key(i).indexOf("carbs_") !== -1) {
+            dtString = Date.parse(localStorage.key(i).substr(6, 4) + "/" + localStorage.key(i).substr(10, 2) + "/" + localStorage.key(i).substr(12, 2) + " " + localStorage.key(i).substr(15, 2) + ":" + localStorage.key(i).substr(17, 2) + ":" + localStorage.key(i).substr(19, 2));
+            carbsString.push("[" + [dtString, localStorage.getItem(propertyName)] + "]");
+            document.getElementById("dataStatusMessage").innerHTML += "Carb " +  dtString + "<br />" + new Date(dtString).toString() + " <br /> " + localStorage.key(i).substr(6, 4) + "/" + localStorage.key(i).substr(10, 2) + "/" + localStorage.key(i).substr(12, 2) + " " + localStorage.key(i).substr(15, 2) + ":" + localStorage.key(i).substr(17, 2) + ":" + localStorage.key(i).substr(19, 2) + "<br />::--- " + localStorage.getItem(propertyName) + "<br />";
+        }
+    }
+    GDoptions.series[1].data = JSON.parse("[" + carbsString + "]");
+};
+
+GlucoDiary.ReadInsulinReading = function () {
+    var i, propertyName, insulinString, dtString;
+    insulinString = [];
+    for (i = 0; i < localStorage.length; i++) {
+        propertyName = localStorage.key(i);
+        if (localStorage.key(i).indexOf("insulin_") !== -1) {
+            dtString = Date.parse(localStorage.key(i).substr(8, 4) + "/" + localStorage.key(i).substr(12, 2) + "/" + localStorage.key(i).substr(14, 2) + " " + localStorage.key(i).substr(17, 2) + ":" + localStorage.key(i).substr(19, 2) + ":" + localStorage.key(i).substr(21, 2));
+            insulinString.push("[" + [dtString, localStorage.getItem(propertyName)] + "]");
+            document.getElementById("dataStatusMessage").innerHTML += "Insu " +  dtString + "<br />" + new Date(dtString).toString() + " <br /> " + localStorage.key(i).substr(8, 4) + "/" + localStorage.key(i).substr(12, 2) + "/" + localStorage.key(i).substr(14, 2) + " " + localStorage.key(i).substr(17, 2) + ":" + localStorage.key(i).substr(19, 2) + ":" + localStorage.key(i).substr(21, 2) + "<br />::--- " + localStorage.getItem(propertyName) + "<br />";
+        }
+    }
+    GDoptions.series[2].data = JSON.parse("[" + insulinString + "]");
 };

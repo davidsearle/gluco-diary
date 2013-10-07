@@ -8,7 +8,7 @@
         <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
         <link rel="stylesheet" href="css/default.css">
         <link rel="stylesheet" href="css/buttons.css">
-        <script src="js/default.js"></script>
+        <script src="js/default.min.js"></script>
         <script src="js/standalone-framework.js"></script>
         <script src="js/highcharts.js"></script>
     </head>
@@ -25,7 +25,7 @@
                     <i class="icon-plus"></i>&nbsp;Insulin&nbsp;</a>
             </div>
             <div class="GDchart GDsection">
-                <div id="highcharts" width="320" height="240" style="margin: 0 auto"></div>
+                <div id="highcharts"></div>
             </div>
             <div class="GDstatus GDsection">
                 <div id="result"></div>
@@ -40,7 +40,17 @@
             <div id="inputGlucoseReading" class="GDsection">
                 <h4>Glucose:</h4>
                 <input type="tel" id="glucoseUnits">
-                <input type="button" value="Save" class="button" onclick="GlucoDiary.SaveGlucoseReading()">
+                <input type="button" value="Save Glucose" class="button is-danger" onclick="GlucoDiary.SaveGlucoseReading()">
+            </div>
+             <div id="inputCarbsReading" class="GDsection">
+                <h4>Carbs:</h4>
+                <input type="tel" id="carbsUnits">
+                <input type="button" value="Save Carbs" class="button is-success" onclick="GlucoDiary.SaveCarbsReading()">
+            </div>
+             <div id="inputInsulinReading" class="GDsection">
+                <h4>Rapid Insulin:</h4>
+                <input type="tel" id="insulinUnits">
+                <input type="button" value="Save Insulin" class="button is-primary" onclick="GlucoDiary.SaveInsulinReading()">
             </div>
             <div class="statusConsole GDsection">
                 <h4>Console:</h4>

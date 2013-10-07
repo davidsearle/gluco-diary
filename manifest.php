@@ -1,13 +1,13 @@
 <?php header("Content-type: text/cache-manifest"); ?>
 CACHE MANIFEST
-#v2.1000444
+#v2.100123456789
 
 CACHE:
 default.htm
-css/default.css
-css/buttons.css
+css/default.min.css
+css/buttons.min.css
 images/icon-sprite.png
 images/icon-sprite@2x.png
-js/default.js
+js/default.min.js
 js/highcharts.js
 js/standalone-framework.js

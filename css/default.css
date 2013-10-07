@@ -49,7 +49,7 @@ body {
 }
 .GDchart {
     padding:7px 0;
-    margin:0;
+    margin:0 auto;
     background-color:#FFF;
 }
 .GDstatus {
