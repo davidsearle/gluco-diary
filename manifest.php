@@ -1,6 +1,6 @@
 <?php header("Content-type: text/cache-manifest"); ?>
 CACHE MANIFEST
-#v2.100123456789
+#v01 2013.10.14 2.32
 
 CACHE:
 default.htm

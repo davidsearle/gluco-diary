@@ -6,8 +6,8 @@
         <link rel='shortcut icon' type='image/x-icon' href='favicon.ico' />
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" />
         <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
-        <link rel="stylesheet" href="css/default.css">
-        <link rel="stylesheet" href="css/buttons.css">
+        <link rel="stylesheet" href="css/default.min.css">
+        <link rel="stylesheet" href="css/buttons.min.css">
         <script src="js/default.min.js"></script>
         <script src="js/standalone-framework.js"></script>
         <script src="js/highcharts.js"></script>
@@ -40,25 +40,33 @@
             <div id="inputGlucoseReading" class="GDsection">
                 <h4>Glucose:</h4>
                 <input type="tel" id="glucoseUnits">
+                <br />
                 <input type="button" value="Save Glucose" class="button is-danger" onclick="GlucoDiary.SaveGlucoseReading()">
             </div>
-             <div id="inputCarbsReading" class="GDsection">
+            <div id="inputCarbsReading" class="GDsection">
                 <h4>Carbs:</h4>
                 <input type="tel" id="carbsUnits">
-                <input type="button" value="Save Carbs" class="button is-success" onclick="GlucoDiary.SaveCarbsReading()">
+                <br />
+                <input type="button" value="Save Carbohydrates" class="button is-success" onclick="GlucoDiary.SaveCarbsReading()">
             </div>
-             <div id="inputInsulinReading" class="GDsection">
+            <div id="inputInsulinReading" class="GDsection">
                 <h4>Rapid Insulin:</h4>
                 <input type="tel" id="insulinUnits">
-                <input type="button" value="Save Insulin" class="button is-primary" onclick="GlucoDiary.SaveInsulinReading()">
+                <br />
+                <input type="button" value="Save Rapid Insulin" class="button is-primary" onclick="GlucoDiary.SaveInsulinReading()">
             </div>
             <div class="statusConsole GDsection">
                 <h4>Console:</h4>
                 <div id="dataStatusMessage"></div>
             </div>
             <div class="GDsection">
-            <br /><br /><br /><br /><br /><br />
-<!--            help scroll into view-->
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <!-- help scroll into view-->
             </div>
         </div>
     </body>
