@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <widget xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0" id="uk.co.cosma.dev" version="1.0.0">
-    <!-- versionCode is optional and Android only -->
     <name>Gluco Diary</name>
     <description>Diabetes Diary for type I, insulin dependent diabetics</description>
     <author href="http://www.cosma.co.uk/david" email="david@cosma.co.uk">David Searle</author>
     <preference name="permissions" value="none" />
-    <access origin="http://127.0.0.1*" />
     <preference name="phonegap-version" value="3.1.0" />
     <icon src="icon.png" />
 </widget>
