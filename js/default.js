@@ -1,16 +1,20 @@
 /*jslint browser: true, devel: true, sloppy: true, plusplus: true */
-var showDebug = false;
+var showDebug = true;
 
 var GlucoDiary = GlucoDiary || {};
 
-GlucoDiary.report = function (debugMessage) {
+GlucoDiary.report = function (message, title) {
     if (showDebug) {
-        alert(debugMessage);
+        if (navigator.notification) {
+            navigator.notification.alert(message, null, title, 'OK');
+        } else {
+            alert(title ? (title + ": " + message) : message);
+        }
     }
 };
 
 window.onload = function () {
-    GlucoDiary.report("window onload");
+    GlucoDiary.report("window.onload", "Info");
     if (GlucoDiary.CheckSupportsStorage() && GlucoDiary.CheckSupportsAppCache()) {
         GlucoDiary.CheckIfOnline();
         GlucoDiary.InitInteractionListeners();
