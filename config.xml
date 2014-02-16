@@ -3,6 +3,7 @@
     <name>Gluco Diary</name>
     <description>Diabetes Diary for type I, insulin dependent diabetics</description>
     <author href="http://www.cosma.co.uk/david" email="david@cosma.co.uk">David Searle</author>
+    <preference name="fullscreen" value="true" />
     <preference name="permissions" value="none" />
     <preference name="phonegap-version" value="3.1.0" />
     <icon src="icon.png" />
