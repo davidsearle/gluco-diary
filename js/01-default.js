@@ -14,18 +14,18 @@ GlucoDiary.report = function (message, title) {
 };
 
 window.onload = function () {
-//    GlucoDiary.report("window.onload", "Info");
-//    if (GlucoDiary.CheckSupportsStorage() && GlucoDiary.CheckSupportsAppCache()) {
-//        GlucoDiary.CheckIfOnline();
-    GlucoDiary.InitInteractionListeners();
-//        if (navigator.notification) {
-//            navigator.notification.beep(3);
-//        }
-//        GlucoDiary.HighChart();
-//        if (navigator.notification) {
-//            navigator.notification.vibrate(1000);
-//        }
-//    } else {
-//        document.getElementById("errormessage").innerHTML = "Your Browser does not support local storage and offline web apps.<br />Please change/update your browser.";
-//    }
+    GlucoDiary.report("window.onload", "Info");
+    if (GlucoDiary.CheckSupportsStorage() && GlucoDiary.CheckSupportsAppCache()) {
+        GlucoDiary.CheckIfOnline();
+        GlucoDiary.InitInteractionListeners();
+        if (navigator.notification) {
+            navigator.notification.beep(3);
+        }
+        GlucoDiary.HighChart();
+        if (navigator.notification) {
+            navigator.notification.vibrate(1000);
+        }
+    } else {
+        document.getElementById("errormessage").innerHTML = "Your Browser does not support local storage and offline web apps.<br />Please change/update your browser.";
+    }
 };
