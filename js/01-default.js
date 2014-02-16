@@ -17,7 +17,7 @@ window.onload = function () {
 //    GlucoDiary.report("window.onload", "Info");
 //    if (GlucoDiary.CheckSupportsStorage() && GlucoDiary.CheckSupportsAppCache()) {
 //        GlucoDiary.CheckIfOnline();
-//        GlucoDiary.InitInteractionListeners();
+    GlucoDiary.InitInteractionListeners();
 //        if (navigator.notification) {
 //            navigator.notification.beep(3);
 //        }
